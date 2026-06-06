@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Base de Aprendizaje</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="estilos.css" type="text/css">
+        <style>
+            .niveles {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            .nivel {
+                flex: 1;
+                min-width: 250px;
+                background-color: #fff;
+                border: 2px solid #f7a8b8;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            }
+            .nivel h3 {
+                margin-top: 0;
+                color: #000;
+                border-bottom: 2px solid #f7a8b8;
+                padding-bottom: 8px;
+                text-align: center;
+            }
+            .lista {
+                line-height: 1.6;
+                font-family: sans-serif;
+            }
+            /* Nuevos estilos para la administración de palabras meta */
+            .meta-section {
+                margin-top: 40px;
+                background-color: #fff;
+                border: 2px solid #f7a8b8;
+                border-radius: 8px;
+                padding: 20px;
+                font-family: sans-serif;
+            }
+            .meta-form {
+                background: #fdf6f7;
+                padding: 15px;
+                border-radius: 6px;
+                margin-bottom: 20px;
+                border: 1px solid #e8a2b0;
+            }
+            .meta-form label {
+                font-weight: bold;
+                display: block;
+                margin-top: 10px;
+            }
+            .meta-form input, .meta-form select, .meta-form button {
+                padding: 8px;
+                margin-top: 5px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+            }
+            .meta-form button {
+                background-color: #f7a8b8;
+                color: white;
+                border: none;
+                font-weight: bold;
+                cursor: pointer;
+                padding: 10px 15px;
+                margin-top: 15px;
+            }
+            .meta-form button:hover {
+                background-color: #e593a3;
+            }
+            .tabla-metas {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+            }
+            .tabla-metas th, .tabla-metas td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: left;
+            }
+            .tabla-metas th {
+                background-color: #f7a8b8;
+                color: white;
+            }
+            .btn-eliminar {
+                background-color: #ff4d4d;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .btn-eliminar:hover {
+                background-color: #cc0000;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <div class="rosa">
+                <img src="logo.png" alt="Abeja">
+                <h1>Lingolyn</h1> 
+            </div>
+
+            <div class="navbar">
+                <a href="registro.html">LOGIN</a>
+                <a href="perfil.html">PERFIL</a>
+                <a href="administrar.html">ADMINISTRAR</a>
+                <a href="Insignias.html">INSIGNIAS</a>
+                <a href="basedeaprendizaje.html">BASE DE APRENDIZAJE</a>
+                <a href="vocabulario.html">VOCABULARIO</a>
+                <a href="ahorcado.jsp">AHORCADO</a>
+                <a href="tradicional.html">MODALIDAD TRADICIONAL</a>
+                <a href="precision.jsp">PRECISION</a>
+            </div>
+        </div>
+
+        <div class="main" style="padding: 20px;">
+            <h2>Base de Aprendizaje</h2>
+            <br><br>
+
+            <div class="niveles">
+                <div class="nivel">
+                    <h3>Principiante</h3>
+                    <div class="lista">
+                        Journey - Viaje<br>
+                        Healthy - Saludable<br>
+                        Weather - Clima<br>
+                        Screen - Pantalla<br>
+                        Century - Siglo<br>
+                        Useful - Útil<br>
+                        Flavor - Sabor<br>
+                        Blanket - Cobija<br>
+                        Kitchen - Cocina<br>
+                        Mirror - Espejo
+                    </div>
+                </div>
+
+                <div class="nivel">
+                    <h3>Intermedio</h3>
+                    <div class="lista">
+                        Purpose - Propósito<br>
+                        Sudden - Repentino<br>
+                        Skill - Habilidad<br>
+                        Crowded - Concurrido<br>
+                        Goal - Meta<br>
+                        Awkward - Incómodo<br>
+                        Foreign - Extranjero<br>
+                        Grateful - Agradecido<br>
+                        Jealous - Celoso<br>
+                        Improve - Mejorar
+                    </div>
+                </div>
+
+                <div class="nivel">
+                    <h3>Avanzado</h3>
+                    <div class="lista">
+                        Challenge - Desafío<br>
+                        Successful - Exitoso<br>
+                        Innocent - Inocente<br>
+                        Advice - Consejo<br>
+                        Slightly - Ligeramente<br>
+                        Doubt - Duda<br>
+                        Schedule - Horario<br>
+                        Straight - Directo<br>
+                        Neighbor - Vecino<br>
+                        Library - Biblioteca
+                    </div>
+                </div>
+            </div>
+
+            <div class="meta-section">
+                <h2>🎯 Administrar Mis Palabras Meta</h2>
+                <p>Define tus objetivos de estudio seleccionando palabras de la lista, asignándoles una fecha límite y prioridad.</p>
+                
+                <button type="button" onclick="conmutarFormularioMeta()" style="padding: 8px 12px; font-weight: bold; cursor: pointer;">
+                    Asignar Nueva Palabra Meta
+                </button>
+                <br><br>
+
+                <div id="form-meta-container" class="meta-form" style="display: none;">
+                    <h3>Configurar Objetivo</h3>
+                    <form onsubmit="event.preventDefault(); guardarPalabraMeta();">
+                        <label for="select-palabra">Selecciona la Palabra:</label>
+                        <select id="select-palabra" style="width: 100%; max-width: 300px;" required>
+                            </select>
+
+                        <label for="fecha-limite">Fecha Límite:</label>
+                        <input type="date" id="fecha-limite" required>
+
+                        <label for="prioridad-meta">Prioridad:</label>
+                        <select id="prioridad-meta">
+                            <option value="Alta">🔴 Alta</option>
+                            <option value="Media">🟡 Media</option>
+                            <option value="Baja">🟢 Baja</option>
+                        </select>
+                        <br>
+                        <button type="submit">Fijar Meta</button>
+                    </form>
+                </div>
+
+                <h3>Mis Objetivos Activos</h3>
+                <table class="tabla-metas">
+                    <thead>
+                        <tr>
+                            <th>Palabra</th>
+                            <th>Traducción</th>
+                            <th>Fecha Límite</th>
+                            <th>Prioridad</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-metas-tbody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            // Mapeo completo de las palabras existentes en tus tres listas
+            const todasLasPalabras = [
+                { ingles: "Journey", espanol: "Viaje" },
+                { ingles: "Healthy", espanol: "Saludable" },
+                { ingles: "Weather", espanol: "Clima" },
+                { ingles: "Screen", espanol: "Pantalla" },
+                { ingles: "Century", espanol: "Siglo" },
+                { ingles: "Useful", espanol: "Útil" },
+                { ingles: "Flavor", espanol: "Sabor" },
+                { ingles: "Blanket", espanol: "Cobija" },
+                { ingles: "Kitchen", espanol: "Cocina" },
+                { ingles: "Mirror", espanol: "Espejo" },
+                { ingles: "Purpose", espanol: "Propósito" },
+                { ingles: "Sudden", espanol: "Repentino" },
+                { ingles: "Skill", espanol: "Habilidad" },
+                { ingles: "Crowded", espanol: "Concurrido" },
+                { ingles: "Goal", espanol: "Meta" },
+                { ingles: "Awkward", espanol: "Incómodo" },
+                { ingles: "Foreign", espanol: "Extranjero" },
+                { ingles: "Grateful", espanol: "Agradecido" },
+                { ingles: "Jealous", espanol: "Celoso" },
+                { ingles: "Improve", espanol: "Mejorar" },
+                { ingles: "Challenge", espanol: "Desafío" },
+                { ingles: "Successful", espanol: "Exitoso" },
+                { ingles: "Innocent", espanol: "Inocente" },
+                { ingles: "Advice", espanol: "Consejo" },
+                { ingles: "Slightly", espanol: "Ligeramente" },
+                { ingles: "Doubt", espanol: "Duda" },
+                { ingles: "Schedule", espanol: "Horario" },
+                { ingles: "Straight", espanol: "Directo" },
+                { ingles: "Neighbor", espanol: "Vecino" },
+                { ingles: "Library", espanol: "Biblioteca" }
+            ];
+
+            // Listado de metas guardadas en memoria
+            let misPalabrasMeta = [
+                { ingles: "Challenge", espanol: "Desafío", fecha: "2026-06-15", prioridad: "Alta" }
+            ];
+
+            window.onload = function() {
+                inicializarSelectorPalabras();
+                renderizarTablaMetas();
+            };
+
+            function conmutarFormularioMeta() {
+                const form = document.getElementById("form-meta-container");
+                if (form.style.display === "none") {
+                    form.style.display = "block";
+                } else {
+                    form.style.display = "none";
+                }
+            }
+
+            function inicializarSelectorPalabras() {
+                const select = document.getElementById("select-palabra");
+                select.innerHTML = "";
+                todasLasPalabras.forEach(item => {
+                    let opt = document.createElement("option");
+                    opt.value = item.ingles;
+                    opt.innerText = `${item.ingles} (${item.espanol})`;
+                    select.appendChild(opt);
+                });
+            }
+
+            function renderizarTablaMetas() {
+                const tbody = document.getElementById("tabla-metas-tbody");
+                tbody.innerHTML = "";
+
+                if (misPalabrasMeta.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">No tienes metas asignadas actualmente.</td></tr>`;
+                    return;
+                }
+
+                misPalabrasMeta.forEach((meta, index) => {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td><strong>${meta.ingles}</strong></td>
+                        <td>${meta.espanol}</td>
+                        <td>${meta.fecha}</td>
+                        <td>${meta.prioridad}</td>
+                        <td><button type="button" class="btn-eliminar" onclick="eliminarMeta(${index})">Quitar</button></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            function guardarPalabraMeta() {
+                const palabraSeleccionada = document.getElementById("select-palabra").value;
+                const fechaLimite = document.getElementById("fecha-limite").value;
+                const prioridad = document.getElementById("prioridad-meta").value;
+
+                // Evitar duplicar la misma palabra meta
+                const yaExiste = misPalabrasMeta.some(meta => meta.ingles === palabraSeleccionada);
+                if (yaExiste) {
+                    alert("Esta palabra ya está configurada como una de tus metas.");
+                    return;
+                }
+
+                const datosPalabra = todasLasPalabras.find(item => item.ingles === palabraSeleccionada);
+                
+                misPalabrasMeta.push({
+                    ingles: datosPalabra.ingles,
+                    espanol: datosPalabra.espanol,
+                    fecha: fechaLimite,
+                    prioridad: prioridad
+                });
+
+                renderizarTablaMetas();
+                
+                // Limpiar campos y ocultar formulario
+                document.getElementById("fecha-limite").value = "";
+                document.getElementById("form-meta-container").style.display = "none";
+                alert(`¡Se ha fijado "${datosPalabra.ingles}" como palabra meta con éxito!`);
+            }
+
+            function eliminarMeta(index) {
+                if (confirm("¿Deseas remover esta palabra de tus metas actuales?")) {
+                    misPalabrasMeta.splice(index, 1);
+                    renderizarTablaMetas();
+                }
+            }
+        </script>
+    </body>
+</html>

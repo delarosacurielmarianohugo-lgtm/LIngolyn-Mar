@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Mi Perfil - Lingolyn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css"/>
+      
+    <style>
+        /* Fondo personalizado y tipografía base */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #FFF9D2; 
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* Contenedor principal estilo tarjeta */
+        .profile-container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border: 3px solid #FBB5B9;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(251, 181, 185, 0.3);
+            box-sizing: border-box;
+        }
+
+        .profile-title {
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            text-align: center;
+            color: #000000;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        /* Avatar de perfil */
+        .avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 12px;
+        }
+
+        .avatar-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #FBB5B9;
+            background-color: #fff0f2;
+        }
+
+        /* Botón Cambiar Foto (Aparece en modo edición) */
+        .avatar-section label {
+            background-color: white;
+            color: black;
+            border: 1px solid #7F7F7F;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .avatar-section label:hover {
+            background-color: #FBB5B9;
+        }
+
+        .avatar-section input[type="file"] {
+            display: none;
+        }
+
+        /* Grupos de campos de datos */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: black;
+            font-size: 0.95rem;
+        }
+
+        /* Texto estático en modo lectura */
+        .form-group p {
+            margin: 0;
+            padding: 10px 12px;
+            background-color: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Entradas de texto y selects en modo edición */
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select {
+            background-color: white;
+            border: 2px solid #FBB5B9;
+            padding: 9px 12px;
+            font-size: 1rem;
+            border-radius: 4px;
+            outline: none;
+            box-sizing: border-box;
+            width: 100%;
+            font-family: sans-serif;
+        }
+
+        /* Contenedores de botones de acción */
+        .btn-container {
+            margin-top: 25px;
+        }
+
+        #view-actions, #edit-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        /* Estilo base para todos los botones del perfil */
+        .btn-container button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+            transition: background-color 0.2s, color 0.2s;
+            box-sizing: border-box;
+        }
+
+        /* Botones principales (Modificar / Guardar) */
+        #btnEditMode, #btnUpdate {
+            background-color: #FBB5B9;
+            color: white;
+            border: 1px solid #51361A;
+        }
+
+        #btnEditMode:hover, #btnUpdate:hover {
+            background-color: #f79da3;
+        }
+
+        /* Botón Eliminar Cuenta */
+        #btnDelete {
+            background-color: white;
+            color: #d9534f;
+            border: 1px solid #d9534f;
+        }
+
+        #btnDelete:hover {
+            background-color: #fff1f0;
+        }
+
+        /* Botón Cancelar */
+        #btnCancel {
+            background-color: white;
+            color: black;
+            border: 1px solid #7F7F7F;
+        }
+
+        #btnCancel:hover {
+            background-color: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+     <div>
+        <div class="rosa">
+            <img src="logo.png" alt="Abeja">
+            <h1>Lingolyn</h1> 
+        </div>
+
+        <div class="navbar">
+            <a href="registro.html">LOGIN</a>
+            <a href="perfil.html">PERFIL</a>
+            <a href="administrar.html">ADMINISTRAR</a>
+            <a href="Insignias.html">INSIGNIAS</a>
+            <a href="basedeaprendizaje.html">BASE DE APRENDIZAJE</a>
+            <a href="vocabulario.html">VOCABULARIO</a>
+            <a href="ahorcado.jsp">AHORCADO</a>
+            <a href="tradicional.html">MODALIDAD TRADICIONAL</a>
+            <a href="precision.jsp">PRECISION</a>
+        </div>
+
+        <div class="profile-container">
+            <h2 class="profile-title">Mi Perfil</h2>
+
+            <form id="profileForm" onsubmit="event.preventDefault();">
+
+                <div class="avatar-section">
+                    <img id="avatarImage" class="avatar-preview" src="https://via.placeholder.com/120" alt="Foto de perfil">
+                    <label id="labelFile" for="fileAvatar" class="edit-mode" style="display: none;">Cambiar foto de perfil</label>
+                    <input type="file" id="fileAvatar" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label>ID de Usuario</label>
+                    <p id="view-userId">USR-77419</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <p id="view-username" class="view-mode">juan_perez99</p>
+                    <input type="text" id="username" class="edit-mode" value="juan_perez99" style="display: none;">
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre(s)</label>
+                    <p id="view-firstName" class="view-mode">Juan Carlos</p>
+                    <input type="text" id="firstName" class="edit-mode" value="Juan Carlos" style="display: none;">
+                </div>
+
+                <div class="form-group">
+                    <label>Apellido Paterno</label>
+                    <p id="view-lastNameP" class="view-mode">Pérez</p>
+                    <input type="text" id="lastNameP" class="edit-mode" value="Pérez" style="display: none;">
+                </div>
+
+                <div class="form-group">
+                    <label>Apellido Materno</label>
+                    <p id="view-lastNameM" class="view-mode">Gómez</p>
+                    <input type="text" id="lastNameM" class="edit-mode" value="Gómez" style="display: none;">
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha de Nacimiento</label>
+                    <p id="view-birthdate" class="view-mode">14/08/1995</p>
+                    <input type="date" id="birthdate" class="edit-mode" value="1995-08-14" style="display: none;">
+                </div>
+
+                <div class="form-group">
+                    <label>Nivel de Inglés</label>
+                    <p id="view-englishLevel" class="view-mode">Intermedio</p>
+                    <select id="englishLevel" class="edit-mode" style="display: none;">
+                        <option value="principiante">Principiante</option>
+                        <option value="intermedio" selected>Intermedio</option>
+                        <option value="avanzado">Avanzado</option>
+                    </select>
+                </div>
+
+                <div class="btn-container">
+                    <div id="view-actions">
+                        <button type="button" id="btnEditMode" onclick="activarEdicion()">Modificar Datos</button>
+                        <button type="button" id="btnDelete" onclick="eliminarUsuario()">Eliminar Cuenta</button>
+                    </div>
+
+                    <div id="edit-actions" style="display: none;">
+                        <button type="button" id="btnUpdate" onclick="guardarCambios()">Guardar Cambios</button>
+                        <button type="button" id="btnCancel" onclick="cancelarEdicion()">Cancelar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fileAvatar').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatarImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function activarEdicion() {
+            document.querySelectorAll('.view-mode').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'block');
+
+            document.getElementById('view-actions').style.display = 'none';
+            document.getElementById('edit-actions').style.display = 'block';
+        }
+
+        function cancelarEdicion() {
+            document.querySelectorAll('.view-mode').forEach(el => el.style.display = 'block');
+            document.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+
+            document.getElementById('view-actions').style.display = 'block';
+            document.getElementById('edit-actions').style.display = 'none';
+
+            document.getElementById('profileForm').reset();
+        }
+
+        function guardarCambios() {
+            const nuevoUsername = document.getElementById('username').value;
+            const nuevoNombre = document.getElementById('firstName').value;
+            const nuevoApellidoP = document.getElementById('lastNameP').value;
+            const nuevoApellidoM = document.getElementById('lastNameM').value;
+            const nuevaFecha = document.getElementById('birthdate').value;
+            const selectId = document.getElementById('englishLevel');
+            const nuevoNivel = selectId.options[selectId.selectedIndex].text;
+
+            document.getElementById('view-username').innerText = nuevoUsername;
+            document.getElementById('view-firstName').innerText = nuevoNombre;
+            document.getElementById('view-lastNameP').innerText = nuevoApellidoP;
+            document.getElementById('view-lastNameM').innerText = nuevoApellidoM;
+            document.getElementById('view-birthdate').innerText = nuevaFecha; 
+            document.getElementById('view-englishLevel').innerText = nuevoNivel;
+
+            alert("Ejecutando proceso de actualización (PUT/PATCH)...");
+            cancelarEdicion();
+        }
+
+        function eliminarUsuario() {
+            const idUsuario = document.getElementById('view-userId').innerText;
+            const confirmar = confirm("¿De verdad quieres eliminar la cuenta " + idUsuario + "?");
+            if (confirmar) {
+                alert("Ejecutando proceso de borrado (DELETE)...");
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Crear Cuenta - Lingolyn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css"/>
+
+    <style>
+        /* Fondo personalizado solicitado y tipografía general */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: #FFF9D2; 
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* Estructura del formulario centrado */
+        .register-container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border: 3px solid #FBB5B9;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(251, 181, 185, 0.3);
+            box-sizing: border-box;
+        }
+
+        .register-title {
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            text-align: center;
+            color: #000000;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        /* Sección de Avatar / Foto de perfil */
+        .avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 12px;
+        }
+
+        .avatar-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #FBB5B9;
+            background-color: #fff0f2;
+        }
+
+        .avatar-section label {
+            background-color: white;
+            color: black;
+            border: 1px solid #7F7F7F;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .avatar-section label:hover {
+            background-color: #FBB5B9;
+        }
+
+        /* Ocultamos el input file real para dejar solo el label estético */
+        .avatar-section input[type="file"] {
+            display: none;
+        }
+
+        /* Grupos del formulario (Inputs y Etiquetas) */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: black;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select {
+            background-color: white;
+            border: 2px solid #FBB5B9;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 4px;
+            outline: none;
+            box-sizing: border-box;
+            width: 100%;
+            font-family: sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #f7a8b8;
+            box-shadow: 0 0 5px rgba(247, 168, 184, 0.5);
+        }
+
+        /* Botón de Registro Estilo Siguiente Rosa */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        #btnCreate {
+            background-color: #FBB5B9;
+            color: white;
+            border: 1px solid #51361A; /* Borde café para resaltar */
+            padding: 12px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        #btnCreate:hover {
+            background-color: #f79da3;
+        }
+    </style>
+
+    <script>
+        // Envolver en window.onload asegura que los elementos ya existan en el DOM antes de asignar el evento
+        window.onload = function() {
+            document.getElementById('regFileAvatar').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('regAvatarImage').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        };
+
+        function crearUsuario() {
+            console.log("Ejecutando Create...");
+            const nuevoUsuario = {
+                username: document.getElementById('regUsername').value,
+                firstName: document.getElementById('regFirstName').value,
+                lastNameP: document.getElementById('regLastNameP').value,
+                lastNameM: document.getElementById('regLastNameM').value,
+                birthdate: document.getElementById('regBirthdate').value,
+                englishLevel: document.getElementById('regEnglishLevel').value
+            };
+
+            alert("¡Registro exitoso para " + nuevoUsuario.username + "!");
+        }
+    </script>
+</head>
+<body>
+    
+    <div>
+        <div class="rosa">
+            <img src="logo.png" alt="Abeja">
+            <h1>Lingolyn</h1> 
+        </div>
+
+        <div class="navbar">
+            <a href="registro.html">LOGIN</a>
+            <a href="perfil.html">PERFIL</a>
+            <a href="administrar.html">ADMINISTRAR</a>
+            <a href="Insignias.html">INSIGNIAS</a>
+            <a href="basedeaprendizaje.html">BASE DE APRENDIZAJE</a>
+            <a href="vocabulario.html">VOCABULARIO</a>
+            <a href="ahorcado.jsp">AHORCADO</a>
+            <a href="tradicional.html">MODALIDAD TRADICIONAL</a>
+            <a href="precision.jsp">PRECISION</a>
+        </div>
+    </div>
+
+    <div class="register-container">
+        <h2 class="register-title">Crear Cuenta - Registro</h2>
+        
+        <form id="registerForm" onsubmit="event.preventDefault(); crearUsuario();">
+            
+            <div class="avatar-section">
+                <img id="regAvatarImage" class="avatar-preview" src="https://via.placeholder.com/120" alt="Previsualizar foto">
+                <label for="regFileAvatar">Subir foto de perfil</label>
+                <input type="file" id="regFileAvatar" accept="image/*" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regUsername">Username</label>
+                <input type="text" id="regUsername" placeholder="Ej. lingo_user" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regFirstName">Nombre(s)</label>
+                <input type="text" id="regFirstName" placeholder="Tus nombres" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regLastNameP">Apellido Paterno</label>
+                <input type="text" id="regLastNameP" placeholder="Apellido paterno" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regLastNameM">Apellido Materno</label>
+                <input type="text" id="regLastNameM" placeholder="Apellido materno" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regBirthdate">Fecha de Nacimiento</label>
+                <input type="date" id="regBirthdate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regEnglishLevel">Nivel de Inglés</label>
+                <select id="regEnglishLevel" required>
+                    <option value="" disabled selected>Selecciona tu nivel</option>
+                    <option value="principiante">Principiante</option>
+                    <option value="intermedio">Intermedio</option>
+                    <option value="avanzado">Avanzado</option>
+                </select>
+            </div>
+
+            <div class="btn-container">
+                <button type="submit" id="btnCreate">Registrarse y Crear Sesión</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Modalidad Tradicional - Juego de Vocabulario</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="estilos.css"/>
+        <style>
+            body { 
+                margin: 0; 
+                padding: 0; 
+                background-color: #FFF9D2; 
+                font-family: 'Nunito', sans-serif;
+            }
+            .vocabulary-container {
+                max-width: 650px;
+                margin: 40px auto;
+                padding: 30px;
+                background-color: #ffffff;
+                border: 3px solid #FBB5B9;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(251, 181, 185, 0.3);
+                box-sizing: border-box;
+                text-align: center;
+            }
+            .vocab-title, h3 {
+                font-family: 'Nunito', sans-serif;
+                font-weight: bold;
+                color: #51361A;
+                margin-top: 0;
+            }
+            .vocab-title { font-size: 1.8rem; margin-bottom: 15px; }
+            h3 { font-size: 1.4rem; margin-bottom: 15px; }
+            p { color: #333; font-size: 1rem; line-height: 1.5; }
+            
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+            }
+            button {
+                background-color: #FBB5B9;
+                color: white;
+                border: 1px solid #51361A;
+                padding: 12px 25px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                border-radius: 3px;
+                cursor: pointer;
+                width: 100%;
+                box-sizing: border-box;
+                transition: background-color 0.2s;
+                margin-bottom: 10px;
+            }
+            button:hover {
+                background-color: #f79da3;
+            }
+            
+            .form-group select, .add-level-box input[type="text"], .form-group input[type="text"] {
+                background-color: white;
+                border: 2px solid #FBB5B9;
+                padding: 10px;
+                font-size: 1rem;
+                border-radius: 4px;
+                outline: none;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            #wordsTable {
+                width: 100%;
+                text-align: left;
+                margin-bottom: 20px;
+                border-collapse: collapse;
+                font-family: sans-serif;
+            }
+            #wordsTable th {
+                background-color: #FBB5B9;
+                color: white;
+                padding: 10px;
+                border: 1px solid #f7a8b8;
+            }
+            #wordsTable td {
+                padding: 10px;
+                border: 1px solid #FBB5B9;
+                background-color: #fff;
+            }
+            #wordsTable select {
+                border: 1px solid #7F7F7F;
+                padding: 4px;
+                border-radius: 3px;
+            }
+            
+            .add-level-box {
+                background-color: #fafafa;
+                border: 1px solid #e0e0e0;
+                padding: 15px;
+                border-radius: 6px;
+                text-align: left;
+                margin-bottom: 15px;
+            }
+            .add-level-box label {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 8px;
+                color: #333;
+            }
+            .add-level-box input {
+                margin-bottom: 10px;
+            }
+            
+            .game-box, .summary-box {
+                text-align: left;
+            }
+            .word-card {
+                background: #fff8f8 !important;
+                border: 2px dashed #FBB5B9 !important;
+                border-radius: 8px;
+                padding: 20px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .word-card h2 {
+                margin: 0;
+                color: #51361A;
+                font-size: 2rem;
+            }
+            
+            ul {
+                padding-left: 20px;
+                line-height: 1.8;
+                color: #333;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="rosa">
+            <img src="logo.png" alt="Abeja">
+            <h1>Lingolyn</h1> 
+        </div>
+
+        <div class="navbar">
+            <a href="registro.html">LOGIN</a>
+            <a href="perfil.html">PERFIL</a>
+            <a href="administrar.html">ADMINISTRAR</a>
+            <a href="Insignias.html">INSIGNIAS</a>
+            <a href="basedeaprendizaje.html">BASE DE APRENDIZAJE</a>
+            <a href="vocabulario.html">VOCABULARIO</a>
+            <a href="ahorcado.jsp">AHORCADO</a>
+            <a href="tradicional.html">MODALIDAD TRADICIONAL</a>
+            <a href="precision.jsp">PRECISION</a>
+        </div>
+        
+        <div class="vocabulary-container">
+
+            <div id="welcome-panel">
+                <h2 class="vocab-title">¡Bienvenido a la Modalidad Tradicional!</h2>
+                <p>Selecciona una opción para empezar (Se evaluará tu deletreo con pistas alternadas):</p>
+                <br>
+                <div class="btn-container">
+                    <button type="button" onclick="pantallaSeleccionarNivel()">Comenzar a Jugar</button>
+                    <button type="button" onclick="pantallaModificarNiveles()">Modificar Niveles</button>
+                </div>
+            </div>
+
+            <div id="select-level-panel" style="display: none;">
+                <h3>Elegir Nivel para Jugar</h3>
+                <p>¿Qué nivel de vocabulario quieres practicar hoy?</p>
+                <br>
+                <div class="form-group">
+                    <select id="playLevelSelect">
+                    </select>
+                </div>
+                <br>
+                <button type="button" onclick="comenzarPartida()">Empezar Partida</button>
+                <button type="button" onclick="volverAlMenu()">Volver al Menú</button>
+            </div>
+
+            <div id="edit-levels-panel" style="display: none;">
+                <h3>Modificar Niveles de Palabras</h3>
+                <p>Cambia el nivel de las palabras predeterminadas del sistema:</p>
+                <br>
+
+                <table id="wordsTable">
+                    <thead>
+                        <tr>
+                            <th>Palabra (Inglés)</th>
+                            <th>Traducción (Español)</th>
+                            <th>Nivel Asignado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="wordsTableBody">
+                    </tbody>
+                </table>
+
+                <div class="add-level-box">
+                    <label for="newLevelName">¿Quieres agregar un nuevo nivel personalizado?</label>
+                    <input type="text" id="newLevelName" placeholder="Ej. Extremo">
+                    <button type="button" onclick="agregarNuevoNivel()" style="margin-top:10px;">Agregar Nivel</button>
+                </div>
+                <br>
+                <button type="button" onclick="guardarConfiguracionNiveles()">OK (Guardar Configuración)</button>
+                <button type="button" onclick="volverAlMenu()">Volver al Menú</button>
+            </div>
+
+            <div id="game-panel" style="display: none;">
+                <div class="game-box">
+                    <h3>Practicando Nivel: <span id="currentPlayingLevel">--</span></h3>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0; font-weight: bold;">
+                        <span>Progreso: <span id="gameProgress">0</span> / <span id="gameTotalWords">0</span></span>
+                        <span style="color: red;">Errores: <span id="gameErrorCount">0</span> / 3</span>
+                    </div>
+                    
+                    <p>Escribe el deletreo correcto basándote en la siguiente pista:</p>
+                    <div style="background-color: #f0f4f8; padding: 10px; border-radius: 4px; margin-bottom: 15px; border-left: 4px solid #FBB5B9;">
+                        <strong>Tipo de pista:</strong> <span id="hintType" style="color: #0056b3;">--</span>
+                    </div>
+
+                    <div class="word-card">
+                        <h2 id="wordHintText">Pista</h2>
+                    </div>
+
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 10px;">
+                        <input type="text" id="userTranslationInput" placeholder="Escribe el deletreo en inglés aquí" autocomplete="off">
+                        <button type="button" id="btnVerify" onclick="validarRespuesta()">Verificar</button>
+                    </div>
+
+                    <div id="feedbackMessage" style="margin-top: 15px; font-weight: bold; text-align: center;"></div>
+
+                    <br>
+                    <button type="button" id="btnNextWord" onclick="siguientePalabra()" style="display:none;">Siguiente Palabra</button>
+                </div>
+            </div>
+
+            <div id="summary-panel" style="display: none;">
+                <div class="summary-box">
+                    <h3>Resumen de Resultados</h3>
+                    <p id="endGameReason" style="font-weight: bold;"></p>
+                    <br>
+                    <ul>
+                        <li>Palabras correctas: <span id="correctCount">0</span></li>
+                        <li>Palabras incorrectas: <span id="incorrectCount">0</span></li>
+                        <li>Total de palabras evaluadas: <span id="totalCount">0</span></li>
+                    </ul>
+                    <br>
+                    <div style="background-color: #f9f9f9; padding: 15px; border: 1px solid #e0e0e0; margin-bottom: 15px; border-radius: 4px;">
+                        <p id="recordComparisonText">Comparando con el récord más alto...</p>
+                    </div>
+                    
+                    <button type="button" onclick="definirComoRecordPartida()">Definir como Récord de esta Partida</button>
+                    <button type="button" onclick="volverAlMenu()">Volver al Menú Principal</button>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            let vocabularioBase = [
+                { ingles: "Journey", espanol: "Viaje", descripcion: "El acto de viajar de un lugar a otro.", ejemplo: "Have a safe journey!", nivel: "facil" },
+                { ingles: "Healthy", espanol: "Saludable", descripcion: "Que goza de buena salud o la promueve.", ejemplo: "Fresh fruit is healthy.", nivel: "facil" },
+                { ingles: "Weather", espanol: "Clima", descripcion: "El estado de la atmósfera en un momento dado.", ejemplo: "The weather is lovely today.", nivel: "facil" },
+                { ingles: "Purpose", espanol: "Propósito", descripcion: "La intención o el objetivo detrás de una acción.", ejemplo: "What is your purpose?", nivel: "medio" },
+                { ingles: "Sudden", espanol: "Repentino", descripcion: "Que ocurre de manera imprevista o rápida.", ejemplo: "There was a sudden change.", nivel: "medio" },
+                { ingles: "Skill", espanol: "Habilidad", descripcion: "Capacidad para hacer una actividad correctamente.", ejemplo: "Coding is a useful skill.", nivel: "medio" },
+                { ingles: "Challenge", espanol: "Desafío", descripcion: "Situación difícil que reta tus capacidades actuales.", ejemplo: "This project is a challenge.", nivel: "dificil" },
+                { ingles: "Successful", espanol: "Exitoso", descripcion: "Que tiene éxito o resultados sumamente positivos.", ejemplo: "She is a successful doctor.", nivel: "dificil" },
+                { ingles: "Advice", espanol: "Consejo", descripcion: "Opinión que se expresa para guiar a alguien.", ejemplo: "Let me give you some advice.", nivel: "dificil" }
+            ];
+
+            let listaRecords = [
+                { nombre: "Master_Lingo", score: 8, fecha: "14/05/2026, 11:24:05" },
+                { nombre: "BetaTester", score: 4, fecha: "29/05/2026, 16:40:12" }
+            ];
+
+            let nivelesDisponibles = ["principiante", "intermedio", "Avanzado"];
+            let palabrasDelJuego = [];
+            let indiceActual = 0;
+            let aciertos = 0;
+            let errores = 0;
+
+            window.onload = function () {
+                actualizarSelectNiveles();
+                renderizarTablaPalabras();
+            };
+
+            function ocultarTodasLasPantallas() {
+                document.getElementById("welcome-panel").style.display = "none";
+                document.getElementById("select-level-panel").style.display = "none";
+                document.getElementById("edit-levels-panel").style.display = "none";
+                document.getElementById("game-panel").style.display = "none";
+                document.getElementById("summary-panel").style.display = "none";
+            }
+
+            function volverAlMenu() {
+                ocultarTodasLasPantallas();
+                document.getElementById("welcome-panel").style.display = "block";
+            }
+
+            function pantallaSeleccionarNivel() {
+                ocultarTodasLasPantallas();
+                document.getElementById("select-level-panel").style.display = "block";
+            }
+
+            function pantallaModificarNiveles() {
+                ocultarTodasLasPantallas();
+                document.getElementById("edit-levels-panel").style.display = "block";
+                renderizarTablaPalabras();
+            }
+
+            function actualizarSelectNiveles() {
+                const playSelect = document.getElementById("playLevelSelect");
+                playSelect.innerHTML = "";
+                nivelesDisponibles.forEach(nivel => {
+                    let option = document.createElement("option");
+                    option.value = nivel;
+                    option.innerText = nivel.charAt(0).toUpperCase() + nivel.slice(1);
+                    playSelect.appendChild(option);
+                });
+            }
+
+            function renderizarTablaPalabras() {
+                const tbody = document.getElementById("wordsTableBody");
+                tbody.innerHTML = "";
+
+                vocabularioBase.forEach((item, index) => {
+                    let tr = document.createElement("tr");
+
+                    let tdIngles = document.createElement("td");
+                    tdIngles.innerText = item.ingles;
+                    tr.appendChild(tdIngles);
+
+                    let tdEspanol = document.createElement("td");
+                    tdEspanol.innerText = item.espanol;
+                    tr.appendChild(tdEspanol);
+
+                    let tdNivel = document.createElement("td");
+                    let select = document.createElement("select");
+                    select.setAttribute("onchange", `cambiarNivelPalabra(${index}, this.value)`);
+
+                    nivelesDisponibles.forEach(nivel => {
+                        let option = document.createElement("option");
+                        option.value = nivel;
+                        option.innerText = nivel.charAt(0).toUpperCase() + nivel.slice(1);
+                        if (nivel === item.nivel) option.selected = true;
+                        select.appendChild(option);
+                    });
+
+                    tdNivel.appendChild(select);
+                    tr.appendChild(tdNivel);
+                    tbody.appendChild(tr);
+                });
+            }
+
+            function cambiarNivelPalabra(index, nuevoNivel) {
+                vocabularioBase[index].nivel = nuevoNivel;
+            }
+
+            function agregarNuevoNivel() {
+                const inputNivel = document.getElementById("newLevelName");
+                const nombreNivel = inputNivel.value.trim().toLowerCase();
+
+                if (nombreNivel === "" || nivelesDisponibles.includes(nombreNivel)) {
+                    alert("Introduce un nombre de nivel válido o que no exista.");
+                    return;
+                }
+
+                nivelesDisponibles.push(nombreNivel);
+                actualizarSelectNiveles();
+                renderizarTablaPalabras();
+                alert(`Nivel "${nombreNivel}" creado.`);
+                inputNivel.value = "";
+            }
+
+            function guardarConfiguracionNiveles() {
+                alert("¡Configuración guardada!");
+                volverAlMenu();
+            }
+
+            function comenzarPartida() {
+                const nivelSeleccionado = document.getElementById("playLevelSelect").value;
+                palabrasDelJuego = vocabularioBase.filter(item => item.nivel === nivelSeleccionado);
+
+                if (palabrasDelJuego.length === 0) {
+                    alert("No hay palabras en este nivel.");
+                    return;
+                }
+
+                indiceActual = 0;
+                aciertos = 0;
+                errores = 0;
+
+                ocultarTodasLasPantallas();
+                document.getElementById("game-panel").style.display = "block";
+                document.getElementById("currentPlayingLevel").innerText = nivelSeleccionado.toUpperCase();
+
+                mostrarPalabraActual();
+            }
+
+            function mostrarPalabraActual() {
+                document.getElementById("userTranslationInput").value = "";
+                document.getElementById("feedbackMessage").innerText = "";
+                document.getElementById("btnVerify").disabled = false;
+                document.getElementById("btnNextWord").style.display = "none";
+
+                document.getElementById("gameProgress").innerText = indiceActual + 1;
+                document.getElementById("gameTotalWords").innerText = palabrasDelJuego.length;
+                document.getElementById("gameErrorCount").innerText = errores;
+
+                const palabraActual = palabrasDelJuego[indiceActual];
+                
+                const tiposPistas = ["traduccion", "definicion", "oracion"];
+                const pistaElegida = tiposPistas[Math.floor(Math.random() * tiposPistas.length)];
+                
+                const labelPista = document.getElementById("hintType");
+                const contenedorPista = document.getElementById("wordHintText");
+
+                if (pistaElegida === "traduccion") {
+                    labelPista.innerText = "Traducción al Español";
+                    contenedorPista.innerText = palabraActual.espanol;
+                } else if (pistaElegida === "definicion") {
+                    labelPista.innerText = "Definición / Significado";
+                    contenedorPista.innerText = palabraActual.descripcion;
+                } else {
+                    labelPista.innerText = "Completar la Oración de Ejemplo";
+                    const expresionRegular = new RegExp(palabraActual.ingles, 'gi');
+                    contenedorPista.innerText = palabraActual.ejemplo.replace(expresionRegular, "_______");
+                }
+            }
+
+            function validarRespuesta() {
+                const respuestaUsuario = document.getElementById("userTranslationInput").value.trim().toLowerCase();
+                const solucionCorrecta = palabrasDelJuego[indiceActual].ingles.toLowerCase();
+                const feedback = document.getElementById("feedbackMessage");
+
+                if (respuestaUsuario === "") return;
+
+                document.getElementById("btnVerify").disabled = true;
+
+                if (respuestaUsuario === solucionCorrecta) {
+                    feedback.innerText = "¡Deletreo Correcto!";
+                    feedback.style.color = "green";
+                    aciertos++;
+                } else {
+                    feedback.innerText = `Incorrecto. El deletreo correcto era: "${palabrasDelJuego[indiceActual].ingles}".`;
+                    feedback.style.color = "red";
+                    errores++;
+                }
+
+                document.getElementById("gameErrorCount").innerText = errores;
+
+                if (errores > 3) {
+                    setTimeout(function() { finalizarPartida(true); }, 1200);
+                } else {
+                    document.getElementById("btnNextWord").style.display = "inline-block";
+                }
+            }
+
+            function siguientePalabra() {
+                indiceActual++;
+                if (indiceActual < palabrasDelJuego.length) {
+                    mostrarPalabraActual();
+                } else {
+                    finalizarPartida(false);
+                }
+            }
+
+            function finalizarPartida(perdioPorErrores) {
+                ocultarTodasLasPantallas();
+                document.getElementById("summary-panel").style.display = "block";
+
+                const motivoFin = document.getElementById("endGameReason");
+                if (perdioPorErrores) {
+                    motivoFin.innerText = " Fin de la partida: Has alcanzado el límite máximo de 3 errores.";
+                    motivoFin.style.color = "red";
+                } else {
+                    motivoFin.innerText = " ¡Enhorabuena! Has evaluado todas las palabras del nivel.";
+                    motivoFin.style.color = "green";
+                }
+
+                document.getElementById("correctCount").innerText = aciertos;
+                document.getElementById("incorrectCount").innerText = errores;
+                document.getElementById("totalCount").innerText = palabrasDelJuego.length;
+
+                const recordMaximo = listaRecords.length > 0 ? listaRecords[0].score : 0;
+                const textoRecord = document.getElementById("recordComparisonText");
+
+                if (aciertos > recordMaximo) {
+                    textoRecord.innerText = `¡Felicidades! Superaste el récord absoluto actual (${recordMaximo} aciertos).`;
+                    textoRecord.style.color = "#b38600";
+                } else {
+                    textoRecord.innerText = `El récord más alto actual en el sistema pertenece a la marca de ${recordMaximo} aciertos.`;
+                    textoRecord.style.color = "#333";
+                }
+            }
+
+            function definirComoRecordPartida() {
+                const nombreJugador = prompt("Ingresa el nombre del jugador para registrar esta marca:", "Nuevo_Jugador");
+                if (nombreJugador === null) return;
+
+                const jugadorLimpio = nombreJugador.trim() !== "" ? nombreJugador.trim() : "Anónimo";
+                const fechaYHora = new Date().toLocaleString(); 
+
+                listaRecords.push({
+                    nombre: jugadorLimpio,
+                    score: aciertos,
+                    fecha: fechaYHora
+                });
+
+                listaRecords.sort((a, b) => b.score - a.score);
+                alert("Se ha guardado tu récord internamente en el sistema.");
+                volverAlMenu();
+            }
+        </script>
+    </body>
+</html>

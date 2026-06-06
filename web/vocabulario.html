@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Módulo de Vocabulario - Práctica de Traducción</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="estilos.css"/>
+        <style>
+            .vocabulary-container {
+                display: flex;
+                gap: 25px;
+                max-width: 1200px;
+                margin: 30px auto;
+                padding: 0 20px;
+                box-sizing: border-box;
+            }
+            
+            /* Columna del Tablero de Juego */
+            .game-side {
+                flex: 2;
+                background: #ffffff;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            }
+
+            /* Columna del Glosario de Apoyo */
+            .glossary-side {
+                flex: 1;
+                background: #fffdf9;
+                padding: 25px;
+                border: 2px dashed #ffb6c1; /* Bordes discontinuos en rosa */
+                border-radius: 15px;
+                max-height: 550px;
+                overflow-y: auto;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+                box-sizing: border-box;
+            }
+
+            .vocab-title {
+                color: #db7093; /* Tonalidad rosa oscuro para resaltar títulos */
+                margin-top: 0;
+            }
+
+            /* Tarjeta Central de la Palabra */
+            .word-card {
+                background: #fff0f5; /* Fondo rosa pastel tenue */
+                border-left: 6px solid #ffb6c1;
+                padding: 25px;
+                text-align: center;
+                border-radius: 10px;
+                margin: 25px 0;
+                box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+            }
+            .word-card p {
+                margin: 0;
+                color: #666;
+                font-weight: 500;
+            }
+            .word-card h1 {
+                margin: 12px 0 0 0;
+                font-size: 38px;
+                color: #cc4e7c; /* Texto de la palabra en rosa intenso */
+                letter-spacing: 0.5px;
+            }
+
+            /* Estilos de Formularios (Campos de Texto y Selectores) */
+            .form-group {
+                display: flex;
+                gap: 12px;
+                margin-top: 15px;
+            }
+            .form-group input[type="text"], .form-group select {
+                flex: 1;
+                padding: 12px;
+                border: 2px solid #ffe4e1;
+                border-radius: 8px;
+                font-size: 15px;
+                outline: none;
+                transition: border-color 0.3s, box-shadow 0.3s;
+                background-color: #fff;
+            }
+            .form-group input[type="text"]:focus, .form-group select:focus {
+                border-color: #ffb6c1;
+                box-shadow: 0 0 5px rgba(2ff, 182, 193, 0.4);
+            }
+
+            button {
+                background-color: #FBB5B9; 
+                color: #333;
+                border: none;
+                padding: 12px 24px;
+                font-size: 15px;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+                transition: transform 0.1s, background-color 0.2s, box-shadow 0.2s;
+            }
+            button:hover {
+                background-color: #e6b800;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+            }
+            button:active {
+                transform: translateY(1px);
+            }
+            button:disabled {
+                background-color: #e0e0e0;
+                color: #888;
+                cursor: not-allowed;
+                box-shadow: none;
+                transform: none;
+            }
+
+            /* Contenedores de botones específicos */
+            .btn-container {
+                margin-top: 10px;
+            }
+
+            /* Elementos del Glosario Dinámico */
+            .glossary-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 8px;
+                border-bottom: 1px solid #ffe4e1;
+            }
+            .glossary-item:last-child {
+                border-bottom: none;
+            }
+            .glossary-item span {
+                font-size: 14px;
+            }
+            .btn-remove {
+                background: none;
+                color: #ff4d4d;
+                border: none;
+                font-size: 16px;
+                font-weight: bold;
+                padding: 0 6px;
+                box-shadow: none;
+                cursor: pointer;
+                transition: color 0.2s, transform 0.2s;
+            }
+            .btn-remove:hover {
+                background: none;
+                color: #cc0000;
+                transform: scale(1.15);
+                box-shadow: none;
+            }
+
+            /* Bloque de Resumen Final */
+            .summary-box {
+                text-align: center;
+                padding: 15px;
+            }
+            .summary-box ul {
+                list-style: none;
+                padding: 0;
+                font-size: 18px;
+                display: inline-block;
+                text-align: left;
+            }
+            .summary-box li {
+                margin: 12px 0;
+                font-weight: 500;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="rosa">
+            <img src="logo.png" alt="Abeja">
+            <h1>Lingolyn</h1> 
+        </div>
+
+        <div class="navbar">
+            <a href="registro.html">LOGIN</a>
+            <a href="perfil.html">PERFIL</a>
+            <a href="administrar.html">ADMINISTRAR</a>
+            <a href="Insignias.html">INSIGNIAS</a>
+            <a href="basedeaprendizaje.html">BASE DE APRENDIZAJE</a>
+            <a href="vocabulario.html">VOCABULARIO</a>
+            <a href="ahorcado.jsp">AHORCADO</a>
+            <a href="tradicional.html">MODALIDAD TRADICIONAL</a>
+            <a href="precision.jsp">PRECISION</a>
+        </div>
+        
+        <div class="vocabulary-container">
+            
+            <div class="game-side">
+                
+                <div id="welcome-panel">
+                    <h2 class="vocab-title">Módulo de Vocabulario: Traducción Directa</h2>
+                    <p>En esta modalidad se te evaluará pidiéndote escribir únicamente la traducción correcta al español de todas las palabras del banco.</p>
+                    <br>
+                    <div class="btn-container">
+                        <button type="button" onclick="comenzarEvaluacionTraduccion()">Comenzar Práctica</button>
+                    </div>
+                </div>
+
+                <div id="game-panel" style="display: none;">
+                    <h3>Evaluación de Vocabulario</h3>
+                    <p style="font-weight: bold;">Progreso: <span id="current-index">0</span> / <span id="total-words">0</span></p>
+                    
+                    <div class="word-card">
+                        <p>Traduce al español la siguiente palabra:</p>
+                        <h1 id="word-to-translate" style="margin: 10px 0; color: #0056b3;">Word</h1>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); verificarTraduccion();">
+                        <div class="form-group">
+                            <input type="text" id="user-translation-input" placeholder="Escribe la traducción aquí..." autocomplete="off" required>
+                            <button type="submit" id="btn-verify">Verificar</button>
+                        </div>
+                    </form>
+
+                    <div id="feedback-message" style="margin-top: 15px; font-weight: bold; font-size: 16px;"></div>
+                    <br>
+                    <button type="button" id="btn-next" onclick="siguientePalabraTraduccion()" style="display: none;">Siguiente Palabra</button>
+                </div>
+
+                <div id="summary-panel" style="display: none;">
+                    <div class="summary-box">
+                        <h3>Resultados de la Práctica</h3>
+                        <p>Has recorrido el banco de palabras completo.</p>
+                        <br>
+                        <ul>
+                            <li>Aciertos: <strong id="final-correct">0</strong></li>
+                            <li>Errores: <strong id="final-incorrect">0</strong></li>
+                        </ul>
+                        <br>
+                        <div class="btn-container">
+                            <button type="button" onclick="volverAlInicioTraduccion()">Volver al Menú Inicial</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="glossary-side">
+                <h3>📋 Mi Glosario de Apoyo</h3>
+                <p style="font-size: 12px; color: #555;">Agrega aquí las palabras que más te cuesten memorizar para tenerlas siempre a la vista durante tus prácticas.</p>
+                <hr>
+                
+                <div style="margin-bottom: 15px;">
+                    <div class="form-group">
+                        <select id="glossary-selector" style="width: 100%; margin-bottom: 8px;">
+                        </select>
+                    </div>
+                    <button type="button" onclick="agregarAlGlosario()" style="width: 100%;">Fijar en Glosario de Apoyo</button>
+                </div>
+
+                <div id="glossary-list-container">
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            // Banco de datos oficial y estricto
+            let bancoPalabrasGlobal = [
+                { ingles: "Journey", espanol: "Viaje" },
+                { ingles: "Healthy", espanol: "Saludable" },
+                { ingles: "Weather", espanol: "Clima" },
+                { ingles: "Purpose", espanol: "Propósito" },
+                { ingles: "Sudden", espanol: "Repentino" },
+                { ingles: "Skill", espanol: "Habilidad" },
+                { ingles: "Challenge", espanol: "Desafío" },
+                { ingles: "Successful", espanol: "Exitoso" },
+                { ingles: "Advice", espanol: "Consejo" }
+            ];
+
+            // Palabras guardadas inicialmente en el glosario de consulta
+            let miGlosarioApoyo = [
+                { ingles: "Purpose", espanol: "Propósito" },
+                { ingles: "Advice", espanol: "Consejo" }
+            ];
+
+            let indicePartida = 0;
+            let aciertos = 0;
+            let errores = 0;
+
+            window.onload = function() {
+                inicializarSelectorGlosario();
+                renderizarGlosarioApoyo();
+            };
+
+            // --- NAVEGACIÓN ---
+            function ocultarTodasLasPantallas() {
+                document.getElementById("welcome-panel").style.display = "none";
+                document.getElementById("game-panel").style.display = "none";
+                document.getElementById("summary-panel").style.display = "none";
+            }
+
+            function volverAlInicioTraduccion() {
+                ocultarTodasLasPantallas();
+                document.getElementById("welcome-panel").style.display = "block";
+            }
+
+            // --- CONTROL DE EVALUACIÓN ---
+            function comenzarEvaluacionTraduccion() {
+                indicePartida = 0;
+                aciertos = 0;
+                errores = 0;
+
+                ocultarTodasLasPantallas();
+                document.getElementById("game-panel").style.display = "block";
+                document.getElementById("total-words").innerText = bancoPalabrasGlobal.length;
+                
+                mostrarPreguntaTraduccion();
+            }
+
+            function mostrarPreguntaTraduccion() {
+                document.getElementById("user-translation-input").value = "";
+                document.getElementById("user-translation-input").disabled = false;
+                document.getElementById("feedback-message").innerText = "";
+                document.getElementById("btn-verify").disabled = false;
+                document.getElementById("btn-next").style.display = "none";
+
+                document.getElementById("current-index").innerText = indicePartida + 1;
+                
+                const palabraActual = bancoPalabrasGlobal[indicePartida];
+                document.getElementById("word-to-translate").innerText = palabraActual.ingles;
+            }
+
+            function verificarTraduccion() {
+                const respuestaUsuario = document.getElementById("user-translation-input").value.trim().toLowerCase();
+                const solucionCorrecta = bancoPalabrasGlobal[indicePartida].espanol.toLowerCase();
+                const feedback = document.getElementById("feedback-message");
+
+                document.getElementById("user-translation-input").disabled = true;
+                document.getElementById("btn-verify").disabled = true;
+
+                if (respuestaUsuario === solucionCorrecta) {
+                    feedback.innerText = "¡Traducción Correcta! ✨";
+                    feedback.style.color = "green";
+                    aciertos++;
+                } else {
+                    feedback.innerText = `Incorrecto. La traducción adecuada es: "${bancoPalabrasGlobal[indicePartida].espanol}"`;
+                    feedback.style.color = "red";
+                    errores++;
+                }
+
+                document.getElementById("btn-next").style.display = "inline-block";
+            }
+
+            function siguientePalabraTraduccion() {
+                indicePartida++;
+                if (indicePartida < bancoPalabrasGlobal.length) {
+                    mostrarPreguntaTraduccion();
+                } else {
+                    ocultarTodasLasPantallas();
+                    document.getElementById("summary-panel").style.display = "block";
+                    document.getElementById("final-correct").innerText = aciertos;
+                    document.getElementById("final-incorrect").innerText = errores;
+                }
+            }
+
+            // --- ACCIONES DEL GLOSARIO (CRUD) ---
+            function inicializarSelectorGlosario() {
+                const select = document.getElementById("glossary-selector");
+                select.innerHTML = "";
+                bancoPalabrasGlobal.forEach(item => {
+                    let opt = document.createElement("option");
+                    opt.value = item.ingles;
+                    opt.innerText = `${item.ingles} (${item.espanol})`;
+                    select.appendChild(opt);
+                });
+            }
+
+            function renderizarGlosarioApoyo() {
+                const contenedor = document.getElementById("glossary-list-container");
+                contenedor.innerHTML = "";
+
+                if (miGlosarioApoyo.length === 0) {
+                    contenedor.innerHTML = `<p style="font-style: italic; color: #888; text-align:center;">Tu glosario está vacío.</p>`;
+                    return;
+                }
+
+                miGlosarioApoyo.forEach((item, index) => {
+                    let div = document.createElement("div");
+                    div.className = "glossary-item";
+                    div.innerHTML = `
+                        <span><strong>${item.ingles}</strong> = ${item.espanol}</span>
+                        <button type="button" onclick="quitarDelGlosario(${index})" style="color:red; font-size:11px; padding: 2px 5px;">✕</button>
+                    `;
+                    contenedor.appendChild(div);
+                });
+            }
+
+            function agregarAlGlosario() {
+                const inglesSeleccionado = document.getElementById("glossary-selector").value;
+                
+                const existe = miGlosarioApoyo.some(item => item.ingles === inglesSeleccionado);
+                if (existe) {
+                    alert("Esta palabra ya se encuentra guardada en tu glosario de apoyo.");
+                    return;
+                }
+
+                const objetoPalabra = bancoPalabrasGlobal.find(item => item.ingles === inglesSeleccionado);
+                if (objetoPalabra) {
+                    miGlosarioApoyo.push({ ...objetoPalabra });
+                    renderizarGlosarioApoyo();
+                }
+            }
+
+            function quitarDelGlosario(index) {
+                miGlosarioApoyo.splice(index, 1);
+                renderizarGlosarioApoyo();
+            }
+        </script>
+    </body>
+</html>

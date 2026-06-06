@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Vista 13</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css" type="text/css">
+    <style>
+        .tiempo label {
+            display: block;
+            margin: 10px 0;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .cuenta {
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div>
+  <div class="rosa">
+      <img src="logo.png" alt="Abeja">
+      <h1>Lingolyn</h1> 
+  </div>
+
+  <div class="navbar">
+    <a href="registro.html">LOGIN</a>
+    <a href="perfil.html">PERFIL</a>
+    <a href="administrar.html">ADMINISTRAR</a>
+    <a href="Insignias.html">INSIGNIAS</a>
+    <a href="basedeaprendizaje.html">BASE DE APRENDIZAJE</a>
+    <a href="vocabulario.html">VOCABULARIO</a>
+    <a href="ahorcado.jsp">AHORCADO</a>
+    <a href="tradicional.html">MODALIDAD TRADICIONAL</a>
+    <a href="precision.jsp">PRECISION</a>
+  </div>
+</div>
+        
+<div class="main">
+    <h2>Seleccionaste “Tiempo limite”</h2><br>
+    <h3>Configuración</h3><br>
+    <h3>Tiempo por palabra</h3>
+
+    <div class="tiempo">
+        <label><input type="radio" name="tiempo" value="20" checked> 20 segundos</label>
+        <label><input type="radio" name="tiempo" value="30"> 30 segundos</label>
+        <label><input type="radio" name="tiempo" value="40"> 40 segundos</label>
+    </div>
+    <br>
+
+    <label class="cuenta"><input type="checkbox" id="chkCuenta" checked> Mostrar cuenta regresiva</label><br><br>
+    
+    <!-- Al dar clic, guarda la configuración y redirige al desafío -->
+    <button class="btn" onclick="guardarConfiguracion()">Aceptar</button>
+</div>
+
+<script>
+    function guardarConfiguracion() {
+        // Buscar cuál radio button está seleccionado
+        const tiempos = document.getElementsByName('tiempo');
+        let tiempoSeleccionado = 20; // Por defecto
+        
+        for (const r of tiempos) {
+            if (r.checked) {
+                tiempoSeleccionado = parseInt(r.value);
+                break;
+            }
+        }
+        
+        const mostrarCuenta = document.getElementById('chkCuenta').checked;
+        
+        // Guardar valores de manera temporal en el navegador
+        localStorage.setItem('tiempoPorPalabra', tiempoSeleccionado);
+        localStorage.setItem('mostrarCuentaRegresiva', mostrarCuenta);
+        
+        // Redirigir a la pantalla del desafío de precisión
+        window.location.href = 'precision.jsp';
+    }
+</script>
+</body>
+</html>

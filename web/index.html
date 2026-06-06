@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Bienvenido - Lingolyn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css"/>
+
+    <style>
+        .welcome-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px 30px;
+            background-color: #ffffff;
+            border: 3px solid #FBB5B9;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(251, 181, 185, 0.3);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .welcome-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #51361A; /* Tono café de la navbar para contrastar */
+            margin: 0 0 15px 0;
+        }
+
+        .btn-start-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-start {
+            display: inline-block;
+            background-color: #FBB5B9;
+            color: white;
+            border: 1px solid #51361A;
+            padding: 14px 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 0px #51361A;
+        }
+
+        .btn-start:hover {
+            background-color: #f79da3;
+        }
+
+        .btn-start:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <div class="rosa">
+            <img src="logo.png" alt="Abeja">
+            <h1>Lingolyn</h1> 
+        </div>
+
+        <div class="navbar">
+            <a href="registro.html">LOGIN</a>
+            <a href="perfil.html">PERFIL</a>
+            <a href="administrar.html">ADMINISTRAR</a>
+            <a href="Insignias.html">INSIGNIAS</a>
+            <a href="basedeaprendizaje.html">BASE DE APRENDIZAJE</a>
+            <a href="vocabulario.html">VOCABULARIO</a>
+            <a href="ahorcado.jsp">AHORCADO</a>
+            <a href="tradicional.html">MODALIDAD TRADICIONAL</a>
+            <a href="precision.jsp">PRECISION</a>
+        </div>
+    </div>
+
+    <div class="welcome-container">
+        <h2 class="welcome-title">¡Te damos la bienvenida a Lingolyn!</h2>
+        
+        <div class="btn-start-container">
+            <a href="registro.html" class="btn-start">¡COMENZAR A JUGAR!</a>
+        </div>
+    </div>
+
+</body>
+</html>

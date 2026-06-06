@@ -1,0 +1,460 @@
+body {
+      margin: 0;
+      
+      background: #FFF9D2;
+    }
+    
+    .rosa {
+    width: 100%;           
+    background: #FBB5B9;
+    display: flex;
+    align-items: center;
+    padding: 20px 20px;    
+    box-sizing: border-box;
+    }
+
+    .rosa img {
+    width: 80px;           
+    height: auto;          
+    margin-right: 15px;
+    }
+
+    .rosa h1 {
+    font-family: Ralewey, sans-serif;
+    margin: 0;
+    font-size: 35px;      
+    color: black;
+    
+    }
+
+    .navbar {
+      font-family: Raleway, sans-serif;
+      display: flex;
+      background: #51361A;
+      color: #fff;
+      padding: 10px;
+      justify-content: center;
+      gap: 20px;
+    }
+    
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      
+    }
+    
+    .navbar a:hover {
+      background: #6F574E;
+    }
+    
+    .main {
+        padding: 30px;
+        position: relative;     
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh;
+        width: 100%;            
+        box-sizing: border-box;
+    }
+    
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: hotpink;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .btn:hover {
+      background: hotpink;
+    }
+    
+    .TextoOpcion{
+        
+        flex-direction: column; /* Obliga a que la pregunta se ponga ABAJO de Muy Bien!! */
+        align-items: center;    /* Centra ambos bloques horizontalmente */
+        text-align: center;     /* Centra el texto por si usas el <br> */
+        gap: 15px;              /* Controla la separación entre el título y la pregunta */
+        margin-top: 40px;
+        font-family: Nunito, sans-serif;
+        font-weight: bold; 
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    
+    }
+    
+    .Opcion{
+        font-family: Nunito, sans-serif;
+        display: flex;
+        flex-direction: column; /*Los alinea en vertical (uno abajo del otro) */
+        align-items: center;    /* 2. Centra los botones horizontalmente */
+        gap: 20px;              /* Espaciado de separación entre cada botón */
+        padding: 10px;
+        
+    }
+    
+    .Opcion a{
+        color: black;
+        text-decoration: none;
+        padding: 10px 25px;     /* Relleno interno para que parezca botón */
+        border: 1px solid #7F7F7F; /* Borde gris como en la imagen */
+        background-color: white;   /* Fondo blanco */
+        border-radius: 2px;
+        min-width: 180px;       /* Ancho mínimo para que todos midan lo mismo */
+        text-align: center;     /* Centra el texto dentro del botón */
+        transition: background-color 0.2s;
+    }
+    
+    .Opcion a:hover {
+        background: #FBB5B9;
+    }
+    
+    .TextoNivel{
+        font-family: Nunito, sans-serif;
+        font-weight: bold; 
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+    
+    .Nivel{
+        font-family: Nunito, sans-serif;
+        display: flex;
+        flex-direction: column; /*Los alinea en vertical (uno abajo del otro) */
+        align-items: center;    /* 2. Centra los botones horizontalmente */
+        gap: 20px;              /* Espaciado de separación entre cada botón */
+        padding: 10px;
+    }
+    
+    .Nivel a{
+        color: black;
+        text-decoration: none;
+        padding: 10px 25px;     /* Relleno interno para que parezca botón */
+        border: 1px solid #7F7F7F; /* Borde gris como en la imagen */
+        background-color: white;   /* Fondo blanco */
+        border-radius: 2px;
+        min-width: 180px;       /* Ancho mínimo para que todos midan lo mismo */
+        text-align: center;     /* Centra el texto dentro del botón */
+        transition: background-color 0.2s;
+    }
+    
+    .Nivel a:hover {
+        background: #FBB5B9;
+    }
+    
+    
+    .Instrucciones{
+       
+        display: flex;
+        flex-direction: column; /* Cambia la orientación a vertical */
+        align-items: center;    /* Centra los elementos horizontalmente */
+        text-align: center;     /* Centra el texto por si se pasa a dos renglones */
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .Instrucciones h1 {
+        font-weight: bold; 
+        font-family: Nunito, sans-serif;
+    }
+    
+    .Instrucciones h3{
+        font-weight: normal;
+        font-family: Raleway, sans-serif;
+        text-align: justify;   /* Hace que las líneas midan lo mismo de lado a lado */
+        max-width: 500px;      /* Limita el ancho para que no se estire en toda la pantalla */
+        margin: 0 auto;
+    }
+    
+    .BotonOk{
+        font-family: Nunito, sans-serif;
+        display: flex;
+        flex-direction: column; /*Los alinea en vertical (uno abajo del otro) */
+        align-items: center;    /* 2. Centra los botones horizontalmente */
+        gap: 20px;              /* Espaciado de separación entre cada botón */
+        padding: 10px;
+    }
+    
+    .BotonOk a{
+        color: #ffe5f0;
+        text-decoration: none;
+        padding: 10px 25px;     /* Relleno interno para que parezca botón */
+        border: 1px solid #7F7F7F; /* Borde gris como en la imagen */
+        background-color: #FBB5B9;   /* Fondo blanco */
+        border-radius: 2px;
+        min-width: 180px;       /* Ancho mínimo para que todos midan lo mismo */
+        text-align: center;     /* Centra el texto dentro del botón */
+        transition: background-color 0.2s;
+    }
+    
+    .BotonOk a:hover {
+        background: #fff;
+    }
+    
+    .TComienza {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;    
+        text-align: center;     
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .contenedorinicio {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;    
+        justify-content: center;
+        margin-top: 40px;       /* Ajustado para que no quede tan separado del menú */
+        margin-bottom: 20px;    
+        width: 100%;            
+        box-sizing: border-box;
+    }
+
+    .contenedorinicio h2 {
+        font-weight: normal;
+        font-family: Nunito, sans-serif; 
+        color: black;
+        text-align: center;
+    }
+
+    /* El botón de la pista con el borde morado de la imagen */
+    .PistaPalabra {
+        background-color: white;
+        color: black;
+        border: 1px solid #000000; 
+        padding: 20px 35px;        
+        font-family: sans-serif;
+        width: 90%;
+        max-width: 600px;          /* Más ancho para que la frase se distribuya en máximo 2 renglones */
+        text-align: center;
+        margin-bottom: 40px;       /* Espacio amplio antes de "Ingresa tu respuesta" */
+    }
+
+    /* La caja de texto blanca donde el usuario escribe */
+    .TextoUsuario {
+        background-color: white;
+        border: 1px solid #000000; /* Borde negro fino */
+         padding: 10px 25px;
+        width: 200px;              /* Ancho idéntico al de la imagen */
+        font-size: 1.2rem;
+        text-align: center;        /* Centra lo que escribe el usuario */
+        outline: none;
+        margin-bottom: 30px;       /* Espacio antes del botón Siguiente */
+    }
+
+    .BotonSiguiente{
+        font-family: Nunito, sans-serif;
+        display: flex;
+        flex-direction: column; /*Los alinea en vertical (uno abajo del otro) */
+        align-items: center;    /* 2. Centra los botones horizontalmente */
+        gap: 20px;              /* Espaciado de separación entre cada botón */
+        padding: 10px;
+    }
+    
+    .BotonSiguiente a{
+        color: #ffe5f0;
+        text-decoration: none;
+        padding: 10px 25px;     /* Relleno interno para que parezca botón */
+        border: 1px solid #7F7F7F; /* Borde gris como en la imagen */
+        background-color: #FBB5B9;   /* Fondo blanco */
+        border-radius: 2px;
+        min-width: 180px;       /* Ancho mínimo para que todos midan lo mismo */
+        text-align: center;     /* Centra el texto dentro del botón */
+        transition: background-color 0.2s;
+    }
+    
+    .BotonSiguiente a:hover{
+          background: #fff;
+    }
+    
+    .SeccionRepetir{
+        display: flex;
+        flex-direction: column; 
+        align-items: center;    
+        justify-content: center;
+        margin-top: 40px;       /* Ajustado para que no quede tan separado del menú */
+        margin-bottom: 20px;    
+        width: 100%;            
+        box-sizing: border-box;
+    }
+    
+    .SeccionRepetir h2{
+        font-weight: normal;
+        font-family: Nunito, sans-serif; 
+        color: black;
+        text-align: center;
+    }
+    
+    .ResumenPractica{
+        display: flex;
+        flex-direction: column; 
+        align-items: center;    
+        justify-content: center;
+        margin-top: 40px;       /* Ajustado para que no quede tan separado del menú */
+        margin-bottom: 20px;    
+        width: 100%;            
+        box-sizing: border-box;
+    }
+    
+    .ResumenPractica h2{
+        font-weight: bold;
+        font-family: Nunito, sans-serif; 
+        color: black;
+        text-align: center;
+    }
+    
+    .Aciertos{
+        color: black;
+        text-decoration: none;
+        padding: 10px 35px;    /* Relleno interno para que parezca botón */
+        border: 1px solid #7F7F7F; /* Borde gris como en la imagen */
+        background-color: white;   /* Fondo blanco */
+        border-radius: 2px;
+        min-width: 180px;       /* Ancho mínimo para que todos midan lo mismo */
+        text-align: left;     /* Centra el texto dentro del botón */
+        
+    }
+    .Errores{
+        color: black;
+        text-decoration: none;
+        padding: 10px 35px;    /* Relleno interno para que parezca botón */
+        border: 1px solid #7F7F7F; /* Borde gris como en la imagen */
+        background-color: white;   /* Fondo blanco */
+        border-radius: 2px;
+        min-width: 180px;       /* Ancho mínimo para que todos midan lo mismo */
+        text-align: left;     /* Centra el texto dentro del botón */
+      
+    }
+    
+    .PalabrasRepetidas{
+        background-color: white;
+        color: black;
+        border: 1px solid #000000; 
+        padding: 20px 35px;        
+        font-family: sans-serif;
+        width: 90%;
+        max-width: 600px;          /* Más ancho para que la frase se distribuya en máximo 2 renglones */
+        text-align: center;
+        margin-bottom: 40px;    
+    }
+    
+    .contenedor-reto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+    }
+
+    .titulo-comienza {
+        font-size: 2rem;
+        font-weight: bold;
+        color: black;
+        margin-bottom: 25px;
+    }
+
+    /* Estilos del Temporizador */
+    .temporizador {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 40px;
+    }
+
+    .cuadro-tiempo {
+        background-color: white;
+        border: 2px solid #FBB5B9; /* Rosa de tus bordes */
+        font-size: 2rem;
+        font-weight: bold;
+        color: black;
+        width: 45px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+    }
+
+    .dos-puntos {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: black;
+        line-height: 1;
+    }
+
+    /* Distribución en dos columnas para Palabra e Input */
+    .columnas-reto {
+        display: flex;
+        justify-content: space-around; /* Separa las columnas de forma equilibrada */
+        width: 100%;
+        max-width: 700px;             /* Ancho máximo de la zona de juego */
+        margin-bottom: 50px;
+    }
+
+    .bloque-juego {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 40%;
+    }
+
+    .bloque-juego h3 {
+        font-size: 1.3rem;
+        font-weight: normal;
+        color: black;
+        margin: 0;
+    }
+
+    /* Cuadro donde se muestra la palabra a deletrear/traducir */
+    .cuadro-palabra {
+        background-color: white;
+        border: 2px solid #FBB5B9;
+        padding: 12px 20px;
+        font-size: 1.2rem;
+        text-align: center;
+        width: 100%;
+        max-width: 200px;
+        border-radius: 2px;
+    }
+
+    /* Caja de entrada de texto */
+    .caja-respuesta {
+        background-color: white;
+        border: 2px solid #FBB5B9;
+        padding: 12px 15px;
+        font-size: 1.2rem;
+        text-align: center;
+        width: 100%;
+        max-width: 200px;
+        border-radius: 2px;
+        outline: none;
+    }
+
+    /* Botón Siguiente Rosa */
+    .boton-siguiente {
+        background-color: #FBB5B9;
+        color: white;
+        border: 1px solid #51361A; /* Borde café oscuro para que resalte */
+        padding: 12px 50px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .boton-siguiente:hover {
+        background-color: #f79da3; /* Un rosa un poco más oscuro al pasar el mouse */
+    }
+    
