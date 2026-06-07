@@ -16,34 +16,32 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/AhorcadoServlet")
 public class Ahorcado extends HttpServlet {
     
-    private final String DB_URL ="jdbc:mysql://" + "localhost:3306/emps?autoReconnect=true&useSSL=false&serverTimezone=UTC";
+    private final String DB_URL = "jdbc:mysql://localhost:3306/lingolyn_db?autoReconnect=true&useSSL=false&serverTimezone=UTC"; 
     private final String DB_USER = "root";
     private final String DB_PASS = "root";
     private String obtenerPalabraDeBaseDeDatos() {
-        String palabra = "LINGOLYN";
+        String palabraRespaldo = "BEE";
         
-        String query = "SELECT palabra FROM palabras ORDER BY RAND() LIMIT 1"; 
+        String query = "SELECT palabra_ingles FROM vocabulario ORDER BY RAND() LIMIT 1"; 
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); 
             
-            // Establecer la conexión y ejecutar la consulta
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
                  PreparedStatement ps = conn.prepareStatement(query);
                  ResultSet rs = ps.executeQuery()) {
                 
                 if (rs.next()) {
-                    // Extrae la palabra, la limpia de espacios y la pasa a mayúsculas
-                    palabra = rs.getString("palabra").toUpperCase().trim();
+                    palabraRespaldo = rs.getString("palabra_ingles").toUpperCase().trim();
                 }
             }
         } catch (ClassNotFoundException e) {
             System.out.println("ERROR: No se encontró el conector de MySQL (.jar): " + e.getMessage());
         } catch (SQLException e) {
-            System.out.println("ERROR SQL: Verifica tu base de datos, tabla o puerto: " + e.getMessage());
+            System.out.println("ERROR SQL: Revisa las columnas de tu tabla 'vocabulario': " + e.getMessage());
         }
         
-        return palabra;
+        return palabraRespaldo; // Retornamos la misma variable
     }
 
     @Override
