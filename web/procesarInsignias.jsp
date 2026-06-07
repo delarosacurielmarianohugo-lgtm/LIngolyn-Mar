@@ -23,8 +23,8 @@
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 
                 // 2. Conexión a tu base de datos (asegúrate de que el nombre coincida)
-                String url = "jdbc:mysql://localhost:3306/emps?autoReconnect=true&useSSL=false&serverTimezone=UTC";
-                con = DriverManager.getConnection(url, "root", "n0m3l0");
+        String url = "jdbc:mysql://localhost:3306/lingolyn_db?autoReconnect=true&useSSL=false&serverTimezone=UTC";
+                con = DriverManager.getConnection(url, "root", "root");
                 st = con.createStatement();
                 
                 // --- OPERACIÓN: AGREGAR (CREATE) ---
