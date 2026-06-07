@@ -131,6 +131,7 @@
         <br><br>
         <button class="btn-juego" onclick="window.location.href='index.html';">Volver al Menú</button>
     </div>
+              <div class="footer-simple"></div>
 
     <script>
         const vocabularioJuego = [];

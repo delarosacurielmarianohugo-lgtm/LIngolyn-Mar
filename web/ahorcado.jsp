@@ -134,6 +134,6 @@
     <a href="AhorcadoServlet?reiniciar=true" class="btn-reiniciar">Siguiente Palabra / Reiniciar</a>
 
   </div>
-
+              <div class="footer-simple"></div>
 </body>
 </html>

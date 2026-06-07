@@ -2,7 +2,10 @@ body {
       margin: 0;
       
       background: #FFF9D2;
-    }
+      display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
     
     .rosa {
     width: 100%;           
@@ -457,4 +460,10 @@ body {
     .boton-siguiente:hover {
         background-color: #f79da3; /* Un rosa un poco más oscuro al pasar el mouse */
     }
-    
+    .footer-simple {
+    background: #51361A !important;
+    height: 40px !important;
+    width: 100% !important;
+    margin-top: auto !important;
+    display: block !important;
+}
